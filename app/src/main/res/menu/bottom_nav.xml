@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/home_icon"
+        android:title="Home" />
+    <item
+        android:id="@+id/chat"
+        android:icon="@drawable/chat_icon"
+        android:title="Chat" />
+
+    <item
+        android:id="@+id/hospital"
+        android:icon="@drawable/hospital_icon"
+        android:title="Hospitals" />
+
+    <item
+        android:id="@+id/map"
+        android:icon="@drawable/map_icon"
+        android:title="Map" />
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/settings_icon"
+        android:title="Settings" />
+
+
+</menu>
