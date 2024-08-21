@@ -12,7 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 class BaseActivity : AppCompatActivity() {
 
-    private lateinit var introNavController: NavController
+//    private lateinit var introNavController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,8 +35,8 @@ class BaseActivity : AppCompatActivity() {
         }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        introNavController = findNavController(R.id.intro_container)
-        return introNavController.navigateUp() || super.onSupportNavigateUp()
-    }
+//    override fun onSupportNavigateUp(): Boolean {
+//        introNavController = findNavController(R.id.intro_container)
+//        return introNavController.navigateUp() || super.onSupportNavigateUp()
+//    }
 }
