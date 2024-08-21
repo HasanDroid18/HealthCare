@@ -12,7 +12,6 @@ import com.google.firebase.auth.FirebaseAuth
 
 class BaseActivity : AppCompatActivity() {
 
-//    private lateinit var introNavController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,12 +30,8 @@ class BaseActivity : AppCompatActivity() {
         super.onPostResume()
         val currentUser = FirebaseAuth.getInstance().currentUser
         if (currentUser == null) {
-            findNavController(R.id.intro_container).navigate(R.id.welcomeFragment)
+            findNavController(R.id.intro_container).navigate(R.id.loginFragment)
         }
     }
 
-//    override fun onSupportNavigateUp(): Boolean {
-//        introNavController = findNavController(R.id.intro_container)
-//        return introNavController.navigateUp() || super.onSupportNavigateUp()
-//    }
 }
