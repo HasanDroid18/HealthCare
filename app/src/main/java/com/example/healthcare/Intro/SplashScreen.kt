@@ -10,7 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import com.example.healthcare.R
 import com.example.healthcare.databinding.ActivitySplashScreenBinding
 import kotlinx.coroutines.delay
-
 import kotlinx.coroutines.launch
 
 class SplashScreen : AppCompatActivity() {
@@ -24,7 +23,7 @@ class SplashScreen : AppCompatActivity() {
         getWindow().setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
-        );
+        )
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
