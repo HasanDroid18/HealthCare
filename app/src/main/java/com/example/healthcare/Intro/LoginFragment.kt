@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.findNavController
 import com.example.healthcare.MainActivity
+import com.example.healthcare.Models.User
 import com.example.healthcare.R
 import com.example.healthcare.databinding.FragmentLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -23,12 +24,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.FirebaseDatabase
 
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var database: FirebaseDatabase
 
     companion object {
         private const val RC_SIGN_IN = 9001
@@ -38,9 +41,9 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         firebaseAuth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -48,7 +51,6 @@ class LoginFragment : Fragment() {
             .build()
 
         googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
-
 
         binding.loginBtn.setOnClickListener {
             val email = binding.loginEmail.text.toString().trim()
@@ -94,8 +96,7 @@ class LoginFragment : Fragment() {
             it.findNavController().navigate(R.id.action_loginFragment_to_signinFragment)
         }
 
-        // Google sign in Button
-        binding.loginGoogleBtn.setOnClickListener{
+        binding.loginGoogleBtn.setOnClickListener {
             signInWithGoogle()
         }
 
@@ -153,12 +154,23 @@ class LoginFragment : Fragment() {
         firebaseAuth.signInWithCredential(credential)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    // Sign in success
-                    val intent = Intent(requireContext(), MainActivity::class.java)
-                    startActivity(intent)
-                    requireActivity().finish()
+                    val userId = firebaseAuth.currentUser?.uid
+                    val userRef = database.getReference("Users").child(userId!!)
+
+                    val name = account?.displayName
+                    val email = account?.email
+                    val user = User(name ?: "", email ?: "")
+
+                    userRef.setValue(user).addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            val intent = Intent(requireContext(), MainActivity::class.java)
+                            startActivity(intent)
+                            requireActivity().finish()
+                        } else {
+                            Toast.makeText(requireContext(), "Failed to save user data.", Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 } else {
-                    // Sign in fails
                     Toast.makeText(requireContext(), "Authentication Failed.", Toast.LENGTH_SHORT).show()
                 }
             }

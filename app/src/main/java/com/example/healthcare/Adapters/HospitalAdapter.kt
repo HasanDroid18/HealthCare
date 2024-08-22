@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.healthcare.HospitalRetro.HospitalItem
+import com.example.healthcare.Models.HospitalItem
 import com.example.healthcare.R
 
 class HospitalAdapter(private var hospitalList: List<HospitalItem>) : RecyclerView.Adapter<HospitalAdapter.HospitalViewHolder>() {

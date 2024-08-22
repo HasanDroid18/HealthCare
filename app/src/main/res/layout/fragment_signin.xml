@@ -40,6 +40,27 @@
 
 
         <TextView
+            android:id="@+id/Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/signup_Name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/edittext_back"
+            android:ems="10"
+            android:hint="Enter Your Name"
+            android:padding="12dp"
+            android:textColor="#707070"
+            android:textSize="18sp" />
+
+        <TextView
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

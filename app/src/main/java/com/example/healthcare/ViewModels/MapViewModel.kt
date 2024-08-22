@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.healthcare.HospitalRetro.HospitalItem
+import com.example.healthcare.Models.HospitalItem
 import com.example.healthcare.HospitalRetro.HospitalService
 import com.example.healthcare.HospitalRetro.Hospitals
 import kotlinx.coroutines.launch

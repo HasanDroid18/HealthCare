@@ -1,4 +1,4 @@
-package com.example.healthcare.HospitalRetro
+package com.example.healthcare.Models
 
 import com.google.gson.annotations.SerializedName
 

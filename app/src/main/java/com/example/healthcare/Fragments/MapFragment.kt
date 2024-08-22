@@ -8,9 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import com.example.healthcare.DependencyInjection.DaggerApplicationComponent2
-import com.example.healthcare.HospitalRetro.HospitalItem
+import com.example.healthcare.Models.HospitalItem
 import com.example.healthcare.HospitalRetro.HospitalService
 import com.example.healthcare.R
 import com.example.healthcare.ViewModel.MapViewModel
@@ -22,7 +21,6 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MapFragment : Fragment(), OnMapReadyCallback {
