@@ -52,6 +52,9 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.androidx.annotation)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.play.services.maps)
+    implementation(libs.play.services.location)
+    implementation(libs.android.maps.utils)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -75,5 +78,7 @@ dependencies {
     kapt ("com.google.dagger:dagger-compiler:2.48.1")
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+
+
 
 }

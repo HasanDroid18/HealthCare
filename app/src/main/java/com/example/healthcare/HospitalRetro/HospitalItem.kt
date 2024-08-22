@@ -8,5 +8,14 @@ data class HospitalItem(
     @SerializedName("type")
     val type: String?,
     @SerializedName("status")
-    val status: String?
+    val status: String?,
+    @SerializedName("info")
+    val info: Info?=null
+)
+
+data class Info(
+    @SerializedName("latitude")
+    val latitude: Double?,
+    @SerializedName("longitude")
+    val longitude: Double?
 )

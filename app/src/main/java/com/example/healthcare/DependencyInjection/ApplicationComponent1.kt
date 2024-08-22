@@ -6,6 +6,6 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [NetworkModule::class])
-interface ApplicationComponent {
+interface ApplicationComponent1 {
     fun inject(fragment: HospitalFragment)
 }

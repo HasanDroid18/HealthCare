@@ -11,11 +11,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.healthcare.Adapters.HospitalAdapter
+import com.example.healthcare.DependencyInjection.DaggerApplicationComponent1
 import com.example.healthcare.HospitalRetro.HospitalItem
 import com.example.healthcare.HospitalRetro.HospitalService
 import com.example.healthcare.HospitalRetro.Hospitals 
 import com.example.healthcare.databinding.FragmentHospitalBinding
-import com.example.healthcare.DependencyInjection.DaggerApplicationComponent
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
@@ -39,7 +39,7 @@ class HospitalFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         // Initialize Dagger and inject dependencies into this fragment
-        DaggerApplicationComponent.create().inject(this)
+        DaggerApplicationComponent1.create().inject(this)
     }
 
     override fun onCreateView(
