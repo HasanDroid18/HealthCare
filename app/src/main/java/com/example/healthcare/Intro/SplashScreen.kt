@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 class SplashScreen : AppCompatActivity() {
 
     private lateinit var binding: ActivitySplashScreenBinding
-    private val SPLASH_SCREEN_DURATION= 4000
+    private val SPLASH_SCREEN_DURATION= 3000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.example.healthcare.EditProfileActivity
 import com.example.healthcare.Intro.BaseActivity
 import com.example.healthcare.R
 import com.example.healthcare.databinding.FragmentSettingsBinding
@@ -38,7 +39,7 @@ class SettingsFragment : Fragment() {
             .build()
         googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
         setupLogoutButton()
-
+        editProfileButton()
         firebaseAuth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
 
@@ -76,6 +77,13 @@ class SettingsFragment : Fragment() {
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
             }
+        }
+    }
+
+    private fun editProfileButton(){
+        binding.editProfileBtn.setOnClickListener{
+            val intent = Intent(requireContext(), EditProfileActivity::class.java)
+            startActivity(intent)
         }
     }
 
