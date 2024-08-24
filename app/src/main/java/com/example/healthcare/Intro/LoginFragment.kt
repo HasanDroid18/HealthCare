@@ -40,7 +40,7 @@ class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         firebaseAuth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
@@ -53,43 +53,11 @@ class LoginFragment : Fragment() {
         googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
 
         binding.loginBtn.setOnClickListener {
-            val email = binding.loginEmail.text.toString().trim()
-            val password = binding.loginPassword.text.toString().trim()
-
-            if (email.isNotEmpty() && password.isNotEmpty()) {
-                firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
-                    if (isAdded) { // Ensure the fragment is attached before accessing context-related functions
-                        if (task.isSuccessful) {
-                            val intent = Intent(requireContext(), MainActivity::class.java)
-                            startActivity(intent)
-                            requireActivity().finish()
-                        } else {
-                            Toast.makeText(requireContext(), task.exception?.message, Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
-            } else {
-                Toast.makeText(requireContext(), "Fields cannot be empty.", Toast.LENGTH_SHORT).show()
-            }
+            loginWithEmailAndPassword()
         }
 
         binding.forgotPassword.setOnClickListener {
-            val builder = AlertDialog.Builder(requireContext())
-            val view = layoutInflater.inflate(R.layout.dialog_forgot, null)
-            val userEmail = view.findViewById<EditText>(R.id.editBox)
-            builder.setView(view)
-            val dialog = builder.create()
-
-            view.findViewById<Button>(R.id.btnReset).setOnClickListener {
-                compareEmail(userEmail)
-                dialog.dismiss()
-            }
-            view.findViewById<Button>(R.id.btnCancel).setOnClickListener {
-                dialog.dismiss()
-            }
-
-            dialog.window?.setBackgroundDrawable(ColorDrawable(0))
-            dialog.show()
+            showForgotPasswordDialog()
         }
 
         binding.signupRedirectText.setOnClickListener {
@@ -101,6 +69,45 @@ class LoginFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun loginWithEmailAndPassword() {
+        val email = binding.loginEmail.text.toString().trim()
+        val password = binding.loginPassword.text.toString().trim()
+
+        if (email.isNotEmpty() && password.isNotEmpty()) {
+            firebaseAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (isAdded && task.isSuccessful) {
+                        val intent = Intent(requireContext(), MainActivity::class.java)
+                        startActivity(intent)
+                        requireActivity().finish()
+                    } else if (isAdded) {
+                        Toast.makeText(requireContext(), task.exception?.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+        } else {
+            Toast.makeText(requireContext(), "Fields cannot be empty.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun showForgotPasswordDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        val view = layoutInflater.inflate(R.layout.dialog_forgot, null)
+        val userEmail = view.findViewById<EditText>(R.id.editBox)
+        builder.setView(view)
+        val dialog = builder.create()
+
+        view.findViewById<Button>(R.id.btnReset).setOnClickListener {
+            compareEmail(userEmail)
+            dialog.dismiss()
+        }
+        view.findViewById<Button>(R.id.btnCancel).setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.window?.setBackgroundDrawable(ColorDrawable(0))
+        dialog.show()
     }
 
     private fun compareEmail(email: EditText) {
@@ -117,15 +124,18 @@ class LoginFragment : Fragment() {
 
         firebaseAuth.sendPasswordResetEmail(emailStr)
             .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
+                if (isAdded && task.isSuccessful) {
                     Toast.makeText(requireContext(), "Check your email for reset instructions.", Toast.LENGTH_SHORT).show()
                 }
             }
             .addOnFailureListener { exception ->
-                if (exception is FirebaseAuthInvalidUserException) {
-                    Toast.makeText(requireContext(), "No account found with this email.", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(requireContext(), "Error: ${exception.message}", Toast.LENGTH_SHORT).show()
+                if (isAdded) {
+                    val message = if (exception is FirebaseAuthInvalidUserException) {
+                        "No account found with this email."
+                    } else {
+                        "Error: ${exception.message}"
+                    }
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                 }
             }
     }
@@ -144,7 +154,9 @@ class LoginFragment : Fragment() {
                 val account = task.getResult(Exception::class.java)
                 firebaseAuthWithGoogle(account)
             } catch (e: Exception) {
-                Toast.makeText(requireContext(), "Google sign-in failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                if (isAdded) {
+                    Toast.makeText(requireContext(), "Google sign-in failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
@@ -153,24 +165,26 @@ class LoginFragment : Fragment() {
         val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
         firebaseAuth.signInWithCredential(credential)
             .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
+                if (isAdded && task.isSuccessful) {
                     val userId = firebaseAuth.currentUser?.uid
                     val userRef = database.getReference("Users").child(userId!!)
 
                     val name = account?.displayName
                     val email = account?.email
-                    val user = User(name ?: "", email ?: "")
+                    val user = User(name ?: "", email ?: "", userId)
 
                     userRef.setValue(user).addOnCompleteListener {
-                        if (it.isSuccessful) {
-                            val intent = Intent(requireContext(), MainActivity::class.java)
-                            startActivity(intent)
-                            requireActivity().finish()
-                        } else {
-                            Toast.makeText(requireContext(), "Failed to save user data.", Toast.LENGTH_SHORT).show()
+                        if (isAdded) {
+                            if (it.isSuccessful) {
+                                val intent = Intent(requireContext(), MainActivity::class.java)
+                                startActivity(intent)
+                                requireActivity().finish()
+                            } else {
+                                Toast.makeText(requireContext(), "Failed to save user data.", Toast.LENGTH_SHORT).show()
+                            }
                         }
                     }
-                } else {
+                } else if (isAdded) {
                     Toast.makeText(requireContext(), "Authentication Failed.", Toast.LENGTH_SHORT).show()
                 }
             }

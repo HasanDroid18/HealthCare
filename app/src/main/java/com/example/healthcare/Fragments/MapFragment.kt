@@ -138,27 +138,33 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         }
 
         fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
-            location?.let {
-                val userLatLng = LatLng(it.latitude, it.longitude)
+            if (isAdded) {  // Check if the fragment is attached
+                location?.let {
+                    val userLatLng = LatLng(it.latitude, it.longitude)
 
-                // Create a custom marker with a specific color or icon
-                val userMarkerIcon = getBitmapFromVectorDrawable(R.drawable.ic_user_location)
+                    // Create a custom marker with a specific color or icon
+                    val userMarkerIcon = getBitmapFromVectorDrawable(R.drawable.ic_user_location)
 
-                googleMap.addMarker(
-                    MarkerOptions()
-                        .position(userLatLng)
-                        .title("Your Location")
-                        .icon(userMarkerIcon)
-                )
+                    googleMap.addMarker(
+                        MarkerOptions()
+                            .position(userLatLng)
+                            .title("Your Location")
+                            .icon(userMarkerIcon)
+                    )
 
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, 12f))
-            } ?: run {
-                Log.e("MapFragment", "User location is null")
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, 12f))
+                } ?: run {
+                    Log.e("MapFragment", "User location is null")
+                }
+            } else {
+                Log.e("MapFragment", "Fragment is not attached")
             }
         }
     }
 
     private fun getBitmapFromVectorDrawable(drawableId: Int): BitmapDescriptor {
+        if (!isAdded) return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)
+
         val vectorDrawable: Drawable? = ContextCompat.getDrawable(requireContext(), drawableId)
         vectorDrawable?.let {
             val bitmap = Bitmap.createBitmap(
@@ -173,6 +179,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         }
         return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE) // Default color in case of failure
     }
+
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
     }

@@ -34,7 +34,7 @@ class SigninFragment : Fragment() {
             val email = binding.signupEmail.text.toString().trim()
             val password = binding.signupPassword.text.toString().trim()
             val confirmPassword = binding.signupConfirmPass.text.toString().trim()
-            val name = binding.signupName.text.toString().trim()  // Assuming you have an EditText for name
+            val name = binding.signupName.text.toString().trim()
 
             if (email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty() && name.isNotEmpty()) {
                 if (password == confirmPassword) {
@@ -43,7 +43,7 @@ class SigninFragment : Fragment() {
                             val userId = firebaseAuth.currentUser?.uid
                             val userRef = database.getReference("Users").child(userId!!)
 
-                            val user = User(name, email)
+                            val user = User(name, email, userId)
 
                             userRef.setValue(user).addOnCompleteListener {
                                 if (it.isSuccessful) {
