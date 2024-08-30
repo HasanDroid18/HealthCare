@@ -1,5 +1,6 @@
 package com.example.healthcare.Fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -11,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import com.example.healthcare.Adapters.SliderAdapter
+import com.example.healthcare.EditProfileActivity
 import com.example.healthcare.Models.SliderItems
+import com.example.healthcare.ScanMain
 import com.example.healthcare.databinding.FragmentHomeBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -34,7 +37,9 @@ class HomeFragment : Fragment() {
             val currentItem = binding.viewpager2.currentItem
             val itemCount = binding.viewpager2.adapter?.itemCount ?: 0
 
-            binding.viewpager2.currentItem = (currentItem + 1) % itemCount
+            if (itemCount > 0) {
+                binding.viewpager2.setCurrentItem((currentItem + 1) % itemCount, true)
+            }
             handler.postDelayed(this, 3000) // Adjust delay as needed
         }
     }
@@ -52,8 +57,24 @@ class HomeFragment : Fragment() {
 
         // Initialize the banner
         initBanner()
+        nextActivity()
+        chatFragment()
 
         return binding.root
+    }
+
+    private fun nextActivity(){
+        binding.NextActBtn.setOnClickListener {
+            val intent = Intent(requireContext(), ScanMain::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun chatFragment(){
+        binding.chaticon.setOnClickListener {
+            val intent = Intent(requireContext(), EditProfileActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun initBanner() {

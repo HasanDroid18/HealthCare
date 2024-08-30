@@ -21,40 +21,38 @@ class EditProfileActivity : AppCompatActivity() {
 
 
         binding.dateOfBirthDisplay.setOnClickListener {
-            showDatePickerDialog()
+//            showDatePickerDialog()
         }
     }
 
 
-    private fun showDatePickerDialog() {
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-
-        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_date_picker, null)
-        val dialogBinding = DialogDatePickerBinding.bind(dialogView)
-
-        val dialogBuilder = AlertDialog.Builder(this)
-            .setView(dialogView)
-            .setCancelable(false)
-
-        val dialog = dialogBuilder.create()
-        dialog.show()
-
-        dialogBinding.calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
-            calendar.set(year, month, dayOfMonth)
-        }
-
-        dialogBinding.btnCancel.setOnClickListener {
-            dialog.dismiss()
-        }
-
-        dialogBinding.btnReset.setOnClickListener {
-            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-            val formattedDate = dateFormat.format(calendar.time)
-            binding.dateOfBirthDisplay.setText(formattedDate)
-            dialog.dismiss()
-        }
-    }
+//    private fun showDatePickerDialog() {
+//        val da = Calendar.getInstance()
+//        val year = calendar.get(Calendar.YEAR)
+//        val month = calendar.get(Calendar.MONTH)
+//        val day = calendar.get(Calendar.DAY_OF_MONTH)
+//
+//        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_date_picker, null)
+//        val dialogBinding = DialogDatePickerBinding.bind(dialogView)
+//
+//        val dialogBuilder = AlertDialog.Builder(this)
+//            .setView(dialogView)
+//            .setCancelable(false)
+//
+//        val dialog = dialogBuilder.create()
+//        dialog.show()
+//
+//        dialogBinding.calendarView.setOnClickListener{}
+//
+//        dialogBinding.btnCancel.setOnClickListener {
+//            dialog.dismiss()
+//        }
+//
+//        dialogBinding.btnReset.setOnClickListener {
+//            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+//            val formattedDate = dateFormat.format(calendar.time)
+//            binding.dateOfBirthDisplay.setText(formattedDate)
+//            dialog.dismiss()
+//        }
+//    }
 }

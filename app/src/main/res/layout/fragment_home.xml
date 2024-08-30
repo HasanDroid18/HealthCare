@@ -44,6 +44,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginStart="8dp"
                     android:text="Welcome"
+                    android:textColor="@android:color/black"
                     app:layout_constraintStart_toEndOf="@+id/profileImageViewMain"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -54,19 +55,20 @@
                     android:layout_marginStart="8dp"
                     android:text="HasanDroid"
                     android:textStyle="bold"
+                    android:textColor="@android:color/black"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/profileImageViewMain"
                     app:layout_constraintTop_toBottomOf="@+id/textView"
                     app:layout_constraintVertical_bias="0.583" />
 
                 <ImageView
-                    android:id="@+id/imageView2"
+                    android:id="@+id/chaticon"
                     android:layout_width="39dp"
                     android:layout_height="33dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/chat_icon" />
+                    app:srcCompat="@drawable/baseline_person_search_24" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -97,9 +99,20 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:id="@+id/NextActBtn"
+            android:layout_marginBottom="25dp"
+            android:layout_gravity="center"
+            android:drawableStart="@drawable/baseline_send_24"
+            android:drawablePadding="10dp"
+            android:background="@drawable/google_btn_back"
+            android:text="Next"
+            android:textColor="@color/primary"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"/>
 
         </LinearLayout>
     </ScrollView>
