@@ -1,6 +1,7 @@
 package com.example.healthcare
 
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.healthcare.databinding.ActivityMainBinding
@@ -9,6 +10,7 @@ import com.example.healthcare.Fragments.HomeFragment
 import com.example.healthcare.Fragments.HospitalFragment
 import com.example.healthcare.Fragments.MapFragment
 import com.example.healthcare.Fragments.SettingsFragment
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -32,6 +34,7 @@ class MainActivity : AppCompatActivity() {
             true
         }
     }
+
     private fun replaceFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()

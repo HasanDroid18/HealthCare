@@ -85,6 +85,18 @@ dependencies {
     kapt("com.github.bumptech.glide:compiler:4.11.0")
     //view pager
     implementation("androidx.viewpager2:viewpager2:1.1.0")
+    // mlkit barcode:
+    implementation("com.google.mlkit:barcode-scanning:17.3.0")
+    // camerax
+    val camerax_version = "1.4.0-rc01"
+    implementation("androidx.camera:camera-core:${camerax_version}")
+    implementation("androidx.camera:camera-camera2:${camerax_version}")
+    // If you want to additionally use the CameraX Lifecycle library
+    implementation("androidx.camera:camera-lifecycle:${camerax_version}")
+    // If you want to additionally use the CameraX View class
+    implementation("androidx.camera:camera-view:${camerax_version}")
+
+
 
 
 
