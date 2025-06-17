@@ -1,13 +1,19 @@
 package com.example.healthcare.Fragments
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.LinearLayout
 import android.widget.Toast
-import com.example.healthcare.EditProfileActivity
+import com.example.healthcare.Activities.EditProfileActivity
 import com.example.healthcare.Intro.BaseActivity
 import com.example.healthcare.R
 import com.example.healthcare.databinding.FragmentSettingsBinding
@@ -61,7 +67,12 @@ class SettingsFragment : Fragment() {
         } else {
             Toast.makeText(requireContext(), "User not logged in.", Toast.LENGTH_SHORT).show()
         }
-
+        binding.languageDialog.setOnClickListener{
+            showBottomDialogLanguage()
+        }
+        binding.fontSizeSlider.setOnClickListener{
+            showBottomDialogFontSize()
+        }
         return binding.root
     }
 
@@ -86,5 +97,52 @@ class SettingsFragment : Fragment() {
             startActivity(intent)
         }
     }
+    private fun showBottomDialogLanguage() {
+
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.bottomsheetlayoutlanguage)
+
+        val arabicLayout: LinearLayout = dialog.findViewById(R.id.arabicLayout)
+        val englishLayout: LinearLayout = dialog.findViewById(R.id.englishLayout)
+
+        arabicLayout.setOnClickListener {
+            dialog.dismiss()
+            Toast.makeText(requireContext(), "Language changed to Arabic", Toast.LENGTH_SHORT).show()
+        }
+
+        englishLayout.setOnClickListener {
+            dialog.dismiss()
+            Toast.makeText(requireContext(), "Language changed to English", Toast.LENGTH_SHORT).show()
+        }
+
+        dialog.show()
+
+        dialog.window?.let { window ->
+            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            window.attributes?.windowAnimations = R.style.DialogAnimation
+            window.setGravity(Gravity.BOTTOM)
+        }
+
+    }
+    private fun showBottomDialogFontSize() {
+
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.bottomsheetlayoutslider)
+
+        dialog.show()
+
+        dialog.window?.let { window ->
+            window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            window.attributes?.windowAnimations = R.style.DialogAnimation
+            window.setGravity(Gravity.BOTTOM)
+        }
+
+    }
+
+
 
 }

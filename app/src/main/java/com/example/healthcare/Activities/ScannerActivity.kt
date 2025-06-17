@@ -1,4 +1,4 @@
-package com.example.healthcare
+package com.example.healthcare.Activities
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -116,7 +116,7 @@ class ScannerActivity : AppCompatActivity() {
     companion object {
         private var onScan: ((barcodes: List<Barcode>) -> Unit)? = null
         fun startScanner(context: Context, onScan: (barcodes: List<Barcode>) -> Unit) {
-            this.onScan = onScan
+            Companion.onScan = onScan
             Intent(context, ScannerActivity::class.java).also {
                 context.startActivity(it)
             }

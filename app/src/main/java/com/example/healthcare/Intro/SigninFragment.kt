@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.findNavController
-import com.example.healthcare.MainActivity
+import com.example.healthcare.Activities.MainActivity
 import com.example.healthcare.Models.User
 import com.example.healthcare.R
 import com.example.healthcare.databinding.FragmentSigninBinding

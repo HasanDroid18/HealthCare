@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import com.example.healthcare.MainActivity
+import com.example.healthcare.Activities.MainActivity
 import com.example.healthcare.R
 import com.google.firebase.auth.FirebaseAuth
 

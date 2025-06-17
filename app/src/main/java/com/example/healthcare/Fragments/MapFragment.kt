@@ -16,7 +16,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.example.healthcare.DependencyInjection.DaggerApplicationComponent2
 import com.example.healthcare.Models.HospitalItem
 import com.example.healthcare.HospitalRetro.HospitalService
 import com.example.healthcare.R
@@ -56,7 +55,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Initialize Dagger and inject dependencies into this fragment
-        DaggerApplicationComponent2.create().inject(this)
+
         // Initialize the location client
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
     }

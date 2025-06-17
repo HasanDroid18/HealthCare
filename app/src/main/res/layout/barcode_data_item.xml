@@ -14,7 +14,9 @@
         android:layout_margin="5dp"
         android:padding="10dp">
 
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/counter"
                 android:layout_width="wrap_content"
@@ -28,6 +30,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageButton
+        android:id="@+id/remove_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="250dp"
+        android:background="@drawable/baseline_delete_24"/>
+</LinearLayout>
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
@@ -55,16 +64,32 @@
                 android:textColor="@android:color/black"
                 android:textStyle="bold" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginEnd="5dp">
             <TextView
                 android:id="@+id/text_view_qr_content"
-                android:layout_width="match_parent"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/google_btn_back"
                 android:padding="5dp"
                 android:text="Content"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold">
+            </TextView>
+
+            <ImageButton
+                android:id="@+id/copy_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="5dp"
+                android:backgroundTint="@color/primary"
+                android:background="@drawable/copy_24"/>
+
+        </LinearLayout>
     </LinearLayout>
 
 

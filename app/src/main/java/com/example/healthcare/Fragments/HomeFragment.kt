@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import com.example.healthcare.Adapters.SliderAdapter
-import com.example.healthcare.EditProfileActivity
+import com.example.healthcare.Activities.EditProfileActivity
 import com.example.healthcare.Models.SliderItems
-import com.example.healthcare.ScanMain
+import com.example.healthcare.Activities.ScanMain
 import com.example.healthcare.databinding.FragmentHomeBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -40,7 +40,7 @@ class HomeFragment : Fragment() {
             if (itemCount > 0) {
                 binding.viewpager2.setCurrentItem((currentItem + 1) % itemCount, true)
             }
-            handler.postDelayed(this, 3000) // Adjust delay as needed
+            handler.postDelayed(this, 10000) // Adjust delay as needed
         }
     }
 

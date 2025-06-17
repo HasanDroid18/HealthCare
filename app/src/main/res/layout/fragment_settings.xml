@@ -28,6 +28,52 @@
             android:textSize="18sp" />
     </RelativeLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/baseline_account_circle_24"
+            app:tint="@color/primary" />
+
+        <TextView
+            android:id="@+id/userNamePlaceholder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="Hasan Taha"
+            android:textColor="@color/primary"
+            android:textSize="22sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/userEmailPlaceholder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="hasan@example.com"
+            android:textColor="@color/primary"
+            android:textSize="12sp"
+            android:layout_gravity="center"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/editProfileBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:paddingStart="30dp"
+            android:layout_gravity="center"
+            android:background="@drawable/rounded_back1"
+            android:text="Edit Profile"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:paddingEnd="30dp"/>
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -37,45 +83,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/baseline_account_circle_24"
-                app:tint="@color/primary" />
-
-            <TextView
-                android:id="@+id/userNamePlaceholder"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:text="Hasan Taha"
-                android:textColor="@color/primary"
-                android:textSize="22sp"
-                android:textStyle="bold"/>
-            <TextView
-                android:id="@+id/userEmailPlaceholder"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="hasan@example.com"
-                android:textColor="@color/primary"
-                android:textSize="12sp"
-                android:layout_gravity="center"/>
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/editProfileBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginTop="20dp"
-                android:paddingStart="30dp"
-                android:layout_gravity="center"
-                android:background="@drawable/rounded_back1"
-                android:text="Edit Profile"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:paddingEnd="30dp"/>
             <LinearLayout
                 android:background="@drawable/round_back2"
                 android:layout_width="match_parent"
@@ -222,6 +229,7 @@
 
                 <!--Text Size-->
                 <RelativeLayout
+                    android:id="@+id/fontSizeSlider"
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -254,6 +262,7 @@
                 <!--Language-->
                 <RelativeLayout
                     android:layout_marginTop="10dp"
+                    android:id="@+id/languageDialog"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 

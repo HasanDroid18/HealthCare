@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.healthcare.ChattingActivity
+import com.example.healthcare.Activities.ChattingActivity
 import com.example.healthcare.Models.User
 import com.example.healthcare.R
 
@@ -29,7 +29,7 @@ class UserAdapter(val context:Context, val userlist:ArrayList<User>):RecyclerVie
         holder.email.text=currentUser.email
 
         holder.itemView.setOnClickListener{
-            val intent = Intent(context,ChattingActivity::class.java)
+            val intent = Intent(context, ChattingActivity::class.java)
 
             intent.putExtra("name",currentUser.name)
             intent.putExtra("uid",currentUser.uid)

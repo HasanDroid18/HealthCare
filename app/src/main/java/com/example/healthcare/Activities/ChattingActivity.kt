@@ -1,4 +1,4 @@
-package com.example.healthcare
+package com.example.healthcare.Activities
 
 import android.os.Bundle
 import android.view.WindowManager

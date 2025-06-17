@@ -1,11 +1,18 @@
-package com.example.healthcare
+package com.example.healthcare.Activities
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
+import android.widget.ImageButton
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.healthcare.Adapters.BarcodeAdapter
 import com.example.healthcare.Models.BarcodeData
+import com.example.healthcare.R
 import com.example.healthcare.Util.cameraPermissionRequest
 import com.example.healthcare.Util.isPermissionGranted
 import com.example.healthcare.Util.openPermissionSetting
@@ -29,7 +36,7 @@ class ScanMain : AppCompatActivity() {
         }
 
     private lateinit var barcodeAdapter: BarcodeAdapter
-    private val barcodeItems = ArrayList<BarcodeData>()
+    private val barcodeItems = mutableListOf<BarcodeData>()
     private lateinit var databaseReference: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +56,8 @@ class ScanMain : AppCompatActivity() {
         binding.scanBtn.setOnClickListener {
             requestCameraAndStartScanner()
         }
+
+
     }
 
     private fun setupRecyclerView() {
@@ -95,8 +104,12 @@ class ScanMain : AppCompatActivity() {
     }
 
     private fun saveToFirebase(barcodeItem: BarcodeData) {
-        databaseReference.push().setValue(barcodeItem)
+        val newItemRef = databaseReference.push()
+        barcodeItem.id = newItemRef.key // Assign Firebase-generated key
+        newItemRef.setValue(barcodeItem)
     }
+
+
 
     private fun loadDataFromFirebase() {
         databaseReference.addValueEventListener(object : ValueEventListener {
